@@ -1,73 +1,110 @@
-# React + TypeScript + Vite
+# Async Team Productivity Dashboard (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The Async Team Productivity Dashboard is a frontend web application designed to simulate how remote teams manage tasks and communicate progress asynchronously without relying on meetings.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal of this project is to demonstrate frontend engineering skills, ownership, and an understanding of remote-first workflows through a realistic, production-style UI.
 
-## React Compiler
+This is a **frontend-heavy project** built with React, emphasizing state management, UI architecture, and clear written communication.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Problem Statement
 
-## Expanding the ESLint configuration
+Remote teams often struggle with:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Tracking task progress across time zones
+- Understanding context without synchronous meetings
+- Maintaining visibility into who is working on what
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Many tools exist, but this project focuses on the core async workflows that matter most:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Task ownership
+- Status updates
+- Written progress communication
+- Activity visibility
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Key Features (Planned)**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Task Management
+- Kanban-style board with task statuses:
+  - To Do
+  - In Progress
+  - Review
+  - Done
+- Create, update, and move tasks between columns
+- Assign tasks to users
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Task Details**
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Task description and metadata
+- Comment thread for async updates
+- Status history and activity log
+
+**Activity Feed**
+
+- Centralized feed showing:
+- Task status changes
+- Comments added
+- Ownership updates
+
+**User Roles**
+
+- Admin: can create and manage tasks
+- Member: can update assigned tasks and add comments
+
+## Tech Stack
+
+- Frontend
+- React
+- TypeScript
+- Tailwind CSS
+- React Query
+- Data / Backend (Supabase)
+
+## Deployment
+
+Vercel (planned)
+
+## Architecture & Design Decisions (Initial)
+
+Async communication is represented through written comments and activity logs, mirroring real remote team workflows.
+State management is designed to handle loading, error, and empty states explicitly.
+These decisions may evolve as the project progresses.
+
+## Current Status
+
+🚧 In Progress – v1
+
+Completed:
+
+- Project planning
+- Initial README
+- Repository setup
+
+Next Steps:
+
+- User authentication and role management
+- Basic Kanban board UI
+- Static task data
+- Core component structure
+
+## Future Improvements
+
+- Drag-and-drop task movement
+- Filtering and search
+- Improved accessibility
+- Supabase data persistence
+
+## Why This Project Exists
+
+This project exists to:
+
+- Demonstrate end-to-end ownership of a frontend application
+- Show clear written communication and documentation
+- Simulate real-world remote work patterns
+- Serve as a portfolio artifact for remote frontend roles
+
+## Author
+
+Built by Samuel Oseh
+Frontend Engineer (MERN – Frontend Focus)

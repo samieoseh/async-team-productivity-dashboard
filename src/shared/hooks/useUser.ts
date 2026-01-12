@@ -1,46 +1,51 @@
 import { useEffect, useState } from "react";
 import supabase from "../supabase";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import type { User } from "@supabase/supabase-js";
 import { useUserStore } from "../store/user";
 
 export default function useUser() {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
+  const { user: zustandUser, setUser: setZustandUser } = useUserStore();
+
   const [isLoading, setIsLoading] = useState(true);
-  const { user: zustandUser } = useUserStore();
+  const [user, setUser] = useState<User | null>(zustandUser || null);
 
   useEffect(() => {
-    async function fetchUser() {
-      const result = await supabase.auth.getUser();
-
-      if (result.error) {
-        toast.error(
-          result.error.message ?? "An error occured while fetching user"
-        );
-        navigate("/auth/sign-in");
-      }
-
-      if (result.data.user) {
-        setUser(result.data.user);
-      }
-
+    // If Zustand already has user, we’re done
+    if (zustandUser) {
       setIsLoading(false);
-
-      return result;
+      return;
     }
 
-    // try to get from zustand first
-    if (!zustandUser) {
-      fetchUser();
+    // Otherwise, fetch from Supabase
+    async function fetchUser() {
+      try {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+          toast.error(error.message ?? "Error fetching user");
+          navigate("/auth/sign-in", { replace: true });
+          return;
+        }
+
+        if (data.user) {
+          setUser(data.user);
+          setZustandUser(data.user); // cache in Zustand
+        } else {
+          navigate("/auth/sign-in", { replace: true });
+        }
+      } catch (err) {
+        toast.error("Unexpected error fetching user");
+        navigate("/auth/sign-in", { replace: true });
+      } finally {
+        setIsLoading(false);
+      }
     }
 
-    setUser(zustandUser);
-  }, []);
+    fetchUser();
+  }, [navigate, setZustandUser, zustandUser]);
 
-  return {
-    user,
-    isLoading,
-  };
+  return { user, isLoading };
 }

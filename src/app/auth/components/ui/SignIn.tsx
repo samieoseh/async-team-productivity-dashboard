@@ -7,16 +7,22 @@ import {
   Typography,
   Paper,
   Divider,
+  InputAdornment,
+  IconButton,
+  CircularProgress,
 } from "@mui/material";
 import {
   Google as GoogleIcon,
   GitHub as GitHubIcon,
   Lock as LockIcon,
+  VisibilityOff,
+  Visibility,
 } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../../lib/signin-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 
 export default function SignIn({
   onSubmit,
@@ -27,6 +33,18 @@ export default function SignIn({
   handleGoogleSignIn: any;
   handleGitHubSignIn: any;
 }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async (data: { email: string; password: string }) => {
+    setLoading(true);
+    try {
+      await onSubmit(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -102,22 +120,39 @@ export default function SignIn({
                   margin="normal"
                   fullWidth
                   variant="outlined"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   label="Password"
                   error={!!error}
                   helperText={error ? error.message : ""}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               )}
             />
 
             <Button
               fullWidth
-              type="button"
+              type="submit"
               variant="contained"
-              onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit(handleSignIn)}
               sx={{ mt: 3, mb: 2, py: 1.5 }}
+              disabled={loading}
+              startIcon={
+                loading ? <CircularProgress size={20} color="inherit" /> : null
+              }
             >
-              Sign In
+              {loading ? "Signing In..." : "Sign In"}
             </Button>
 
             <Box

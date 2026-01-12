@@ -1,15 +1,25 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, Outlet } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import SignInPage from "./app/auth/pages/SignInPage";
 import SignUpPage from "./app/auth/pages/SignUpPage";
+import HomePage from "./app/home/pages/HomePage";
+import PrivateRoute from "./shared/components/PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello World</div>,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+        index: true,
+      },
+    ],
   },
   {
     path: "/auth",
@@ -31,5 +41,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <Toaster />
   </StrictMode>
 );

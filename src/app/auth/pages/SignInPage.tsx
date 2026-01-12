@@ -28,11 +28,15 @@ export default function SignInPage() {
   };
 
   const handleGoogleSignIn = () => {
-    // TODO: Implement Google OAuth sign-in
+    supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
   };
 
   const handleGitHubSignIn = () => {
-    // TODO: Implement GitHub OAuth sign-in
+    supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
   };
 
   return (

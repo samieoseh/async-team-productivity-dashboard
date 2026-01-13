@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router";
 import { Controller, useForm } from "react-hook-form";
-import { schema } from "../../lib/signin-schema";
+import { schema, type SignInData } from "../../lib/signin-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 
@@ -29,14 +29,14 @@ export default function SignIn({
   handleGoogleSignIn,
   handleGitHubSignIn,
 }: {
-  onSubmit: ({ email, password }: { email: string; password: string }) => void;
+  onSubmit: ({ email, password }: SignInData) => void;
   handleGoogleSignIn: any;
   handleGitHubSignIn: any;
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSignIn = async (data: { email: string; password: string }) => {
+  const handleSignIn = async (data: SignInData) => {
     setLoading(true);
     try {
       await onSubmit(data);
@@ -102,6 +102,7 @@ export default function SignIn({
                   fullWidth
                   variant="outlined"
                   id="email"
+                  value={field.value}
                   label="Email Address"
                   autoComplete="email"
                   autoFocus
@@ -119,6 +120,7 @@ export default function SignIn({
                   {...field}
                   margin="normal"
                   fullWidth
+                  value={field.value}
                   variant="outlined"
                   type={showPassword ? "text" : "password"}
                   id="password"

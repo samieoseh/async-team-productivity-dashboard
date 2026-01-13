@@ -8,11 +8,13 @@ import SignInPage from "./app/auth/pages/SignInPage";
 import SignUpPage from "./app/auth/pages/SignUpPage";
 import HomePage from "./app/home/pages/HomePage";
 import PrivateRoute from "./shared/components/PrivateRoute";
+import RouteErrorBoundary from "./shared/components/RouteErrorBoundary";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PrivateRoute />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       {
         path: "/",
@@ -24,6 +26,7 @@ const router = createBrowserRouter([
   {
     path: "/auth",
     element: <Outlet />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       {
         path: "sign-in",

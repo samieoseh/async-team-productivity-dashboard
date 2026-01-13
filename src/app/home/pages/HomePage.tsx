@@ -1,3 +1,6 @@
+import { useUserStore } from "../../../shared/store/user";
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  const { user } = useUserStore();
+  return <div>Welcome, {user?.email}</div>;
 }

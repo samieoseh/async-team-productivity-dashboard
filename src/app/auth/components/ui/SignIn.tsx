@@ -165,8 +165,7 @@ export default function SignIn({
                 flexDirection: "column",
               }}
             >
-              <Link href="#" variant="body2">
-                {/* TODO: Add forgot password functionality */}
+              <Link href="/auth/forgot-password" variant="body2">
                 Forgot password?
               </Link>
               <Typography

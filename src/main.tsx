@@ -9,6 +9,8 @@ import SignUpPage from "./app/auth/pages/SignUpPage";
 import HomePage from "./app/home/pages/HomePage";
 import PrivateRoute from "./shared/components/PrivateRoute";
 import RouteErrorBoundary from "./shared/components/RouteErrorBoundary";
+import ForgotPasswordPage from "./app/auth/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./app/auth/pages/ResetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "sign-up",
         element: <SignUpPage />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPasswordPage />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPasswordPage />,
       },
     ],
   },

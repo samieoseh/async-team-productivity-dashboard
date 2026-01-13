@@ -1,10 +1,59 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import { Toaster } from "react-hot-toast";
+import { createBrowserRouter, Outlet } from "react-router";
+import { RouterProvider } from "react-router/dom";
+import SignInPage from "./app/auth/pages/SignInPage";
+import SignUpPage from "./app/auth/pages/SignUpPage";
+import HomePage from "./app/home/pages/HomePage";
+import PrivateRoute from "./shared/components/PrivateRoute";
+import RouteErrorBoundary from "./shared/components/RouteErrorBoundary";
+import ForgotPasswordPage from "./app/auth/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./app/auth/pages/ResetPasswordPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <PrivateRoute />,
+    errorElement: <RouteErrorBoundary />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+        index: true,
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <Outlet />,
+    errorElement: <RouteErrorBoundary />,
+    children: [
+      {
+        path: "sign-in",
+        element: <SignInPage />,
+        index: true,
+      },
+      {
+        path: "sign-up",
+        element: <SignUpPage />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPasswordPage />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPasswordPage />,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
+    <Toaster />
   </StrictMode>
 );

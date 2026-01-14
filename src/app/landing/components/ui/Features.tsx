@@ -30,9 +30,11 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="py-24 px-24 bg-[#F0F2F4]/30">
+    <section
+      id="features"
+      className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 xl:px-24 bg-[#F0F2F4]/30"
+    >
       <div className="container max-w-6xl mx-auto">
-        {/* Section header */}
         <div className="text-center mb-16">
           <Typography
             variant="h4"

@@ -39,9 +39,11 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="p-24">
+    <section
+      id="how-it-works"
+      className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 xl:px-24"
+    >
       <div className="container max-w-6xl mx-auto">
-        {/* Section header */}
         <div className="text-center mb-16">
           <Typography variant="h4" sx={{ marginBottom: 1 }}>
             How it works
@@ -53,7 +55,7 @@ export default function HowItWorks() {
 
         {/* Steps */}
         <div className="relative">
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-[#D1D5DB] -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 mt-4 left-0 right-0 h-0.5 bg-[#2463EB]/10 -translate-y-1/2" />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {steps.map((step, index) => (

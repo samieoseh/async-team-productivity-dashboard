@@ -30,7 +30,7 @@ export default function SignUpPage() {
       email: data.email,
       password: data.password,
     });
-    navigate("/");
+    navigate("/dashboard");
   };
 
   const handleGoogleSignUp = () => {

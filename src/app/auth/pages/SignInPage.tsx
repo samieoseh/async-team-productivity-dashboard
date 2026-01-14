@@ -24,7 +24,7 @@ export default function SignInPage() {
     setUser(result.data.user!);
     toast.success("Successfully signed in.");
 
-    navigate("/");
+    navigate("/dashboard");
   };
 
   const handleGoogleSignIn = () => {

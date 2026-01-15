@@ -1,6 +1,9 @@
-import { useUserStore } from "../../../shared/store/user";
+import DashboardHeader from "../components/DashboardHeader";
 
 export default function HomePage() {
-  const { user } = useUserStore();
-  return <div>Welcome, {user?.email}</div>;
+  return (
+    <main className="max-w-400 mx-auto">
+      <DashboardHeader />
+    </main>
+  );
 }

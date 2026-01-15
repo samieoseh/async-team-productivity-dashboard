@@ -12,7 +12,7 @@ const neutral = {
 
 export const theme = createTheme({
   shape: {
-    borderRadius: 9999,
+    borderRadius: 6,
   },
 
   palette: {
@@ -113,10 +113,17 @@ export const theme = createTheme({
       },
     },
 
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 6,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 9999,
+          borderRadius: 8,
           padding: "10px 20px",
           boxShadow: "none",
           transition: "all 0.2s ease",

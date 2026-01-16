@@ -161,6 +161,17 @@ export const theme = createTheme({
       },
     },
 
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: neutral[500],
+          "&.Mui-focused": {
+            color: "#2463EB", // primary color when focused
+          },
+        },
+      },
+    },
+
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -177,14 +188,21 @@ export const theme = createTheme({
             borderWidth: 2,
           },
         },
+
+        input: {
+          "&::placeholder": {
+            color: "gray",
+          },
+          color: "black", // if you also want to change the color of the input, this is the prop you'd use
+        },
       },
     },
 
     MuiDialog: {
       styleOverrides: {
         paper: {
-          borderRadius: 32,
-          padding: 16,
+          borderRadius: 6,
+          padding: 8,
         },
       },
     },

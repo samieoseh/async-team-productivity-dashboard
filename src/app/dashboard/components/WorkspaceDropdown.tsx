@@ -1,19 +1,21 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Popover, Typography } from "@mui/material";
-import { useState } from "react";
-import type { WorkSpace } from "../../../shared/types/dashboard-types";
+import { useEffect, useState } from "react";
+import type { Workspace } from "../../../shared/types/dashboard-types";
 import WorkSpaceItem from "./WorkSpaceItem";
 import { Plus } from "lucide-react";
+import NewWorkspaceDialog from "./NewWorkspaceDialog";
 
 export default function WorkspaceDropdown({
   workspaces,
   selectedWorkspaceId,
   setSelectedWorkspaceId,
 }: {
-  workspaces: WorkSpace[];
+  workspaces: Workspace[];
   selectedWorkspaceId: string | null;
   setSelectedWorkspaceId: (workspaceId: string) => void;
 }) {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,8 +26,22 @@ export default function WorkspaceDropdown({
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    if (workspaces.length > 0 && !selectedWorkspaceId) {
+      setSelectedWorkspaceId(workspaces[0].id);
+    }
+  }, [workspaces, selectedWorkspaceId, setSelectedWorkspaceId]);
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const handleClickDialogOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   return (
     <div className="relative inline-flex">
@@ -83,10 +99,14 @@ export default function WorkspaceDropdown({
 
         <hr className="border-t border-slate-200" />
         <div className="py-2 px-4">
-          <button className="flex gap-2 items-center py-2.5 px-2 cursor-pointer rounded-md w-full hover:border-slate-300 hover:bg-gray-50 text-gray-500 font-semibold">
+          <button
+            onClick={handleClickDialogOpen}
+            className="flex gap-2 items-center py-2.5 px-2 cursor-pointer rounded-md w-full hover:border-slate-300 hover:bg-gray-50 text-gray-500 font-semibold"
+          >
             <Plus />
             Create a workspace
           </button>
+          <NewWorkspaceDialog open={dialogOpen} onClose={handleDialogClose} />
         </div>
       </Popover>
     </div>

@@ -21,6 +21,7 @@ import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/900.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const router = createBrowserRouter([
   {
@@ -64,12 +65,15 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-      <Toaster />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+        <Toaster />
+      </ThemeProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

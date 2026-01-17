@@ -30,12 +30,18 @@ export default function SignInPage() {
   const handleGoogleSignIn = () => {
     supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo: "http://localhost:5173/dashboard",
+      },
     });
   };
 
   const handleGitHubSignIn = () => {
     supabase.auth.signInWithOAuth({
       provider: "github",
+      options: {
+        redirectTo: "/dashboard",
+      },
     });
   };
 

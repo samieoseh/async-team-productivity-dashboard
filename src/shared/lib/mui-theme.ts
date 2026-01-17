@@ -12,7 +12,7 @@ const neutral = {
 
 export const theme = createTheme({
   shape: {
-    borderRadius: 9999,
+    borderRadius: 6,
   },
 
   palette: {
@@ -113,10 +113,17 @@ export const theme = createTheme({
       },
     },
 
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          borderRadius: 6,
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 9999,
+          borderRadius: 8,
           padding: "10px 20px",
           boxShadow: "none",
           transition: "all 0.2s ease",
@@ -154,6 +161,17 @@ export const theme = createTheme({
       },
     },
 
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: neutral[500],
+          "&.Mui-focused": {
+            color: "#2463EB", // primary color when focused
+          },
+        },
+      },
+    },
+
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -170,14 +188,21 @@ export const theme = createTheme({
             borderWidth: 2,
           },
         },
+
+        input: {
+          "&::placeholder": {
+            color: "gray",
+          },
+          color: "black", // if you also want to change the color of the input, this is the prop you'd use
+        },
       },
     },
 
     MuiDialog: {
       styleOverrides: {
         paper: {
-          borderRadius: 32,
-          padding: 16,
+          borderRadius: 6,
+          padding: 8,
         },
       },
     },

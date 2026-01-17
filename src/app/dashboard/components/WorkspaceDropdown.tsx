@@ -52,7 +52,8 @@ export default function WorkspaceDropdown({
       >
         <span className="truncate max-w-[140px] text-[1rem]">
           {selectedWorkspaceId
-            ? workspaces.find((ws) => ws.id === selectedWorkspaceId)?.name
+            ? workspaces.find((ws) => ws.id === selectedWorkspaceId)?.name ||
+              "Default Workspace"
             : "My workspace"}
         </span>
         <KeyboardArrowDownIcon fontSize="small" className="text-slate-500" />

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 export default function UserDropdown() {
   const { user } = useUser();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userPhoto = user?.user_metadata.avatar_url;
   const displayName = user?.user_metadata.display_name;
 
@@ -29,10 +29,10 @@ export default function UserDropdown() {
     if (result.error) {
       console.error(result.error.message);
     } else {
-        navigate("/auth/sign-in")
-        handleClose();
+      navigate("/auth/sign-in");
+      handleClose();
     }
-  }
+  };
   return (
     <div>
       <button className="cursor-pointer" onClick={handleClick}>
